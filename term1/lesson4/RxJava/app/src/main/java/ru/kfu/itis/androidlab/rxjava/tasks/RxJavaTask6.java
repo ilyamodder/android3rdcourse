@@ -22,7 +22,14 @@ public class RxJavaTask6 {
      */
     @NonNull
     public static Observable<BigInteger> task6Observable() {
-        return Observable.just(BigInteger.ONE);
+        return Observable.range(1, 100_000)
+                .map(i -> i * 2)
+                .skip(40_000)
+                .skipLast(40_000)
+                .filter(i -> i % 3 == 0)
+                .map(BigInteger::valueOf)
+                .reduce(BigInteger.ONE, BigInteger::multiply)
+                .cache();
     }
 
 }

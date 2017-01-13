@@ -1,6 +1,7 @@
 package ru.kfu.itis.androidlab.rxjava.tasks;
 
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 
 import java.util.List;
 
@@ -21,7 +22,9 @@ public class RxJavaTask1 {
      */
     @NonNull
     public static Observable<Integer> task1(@NonNull List<String> list) {
-        return Observable.just(0);
+        return Observable.from(list)
+                .filter(s -> s.contains("R") || s.contains("r"))
+                .map(String::length);
     }
 
 }

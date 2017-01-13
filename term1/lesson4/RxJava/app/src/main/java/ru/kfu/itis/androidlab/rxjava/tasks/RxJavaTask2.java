@@ -1,6 +1,7 @@
 package ru.kfu.itis.androidlab.rxjava.tasks;
 
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 
 import rx.Observable;
 
@@ -17,7 +18,10 @@ public class RxJavaTask2 {
      */
     @NonNull
     public static Observable<String> task2(@NonNull Observable<String> observable) {
-        return Observable.just("");
+        return observable
+                .skipUntil(Observable.just("END"))
+                .filter(s -> !"END".equals(s))
+                .distinct();
     }
 
 }
